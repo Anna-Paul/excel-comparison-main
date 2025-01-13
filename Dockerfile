@@ -15,7 +15,9 @@ RUN dotnet restore "./ExelComparison/ExelComparison.csproj"
 COPY . .
 WORKDIR "/src/ExelComparison"
 RUN dotnet build "./ExelComparison.csproj" -c $BUILD_CONFIGURATION -o /app/build
-COPY ["ExelComparison/Aspose.Cells.NET.lic", "/app/build/Aspose.Cells.NET.lic"]
+RUN ls -la ./
+COPY ["./Aspose.Cells.NET.lic", "/app/build/Aspose.Cells.NET.lic"]
+
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
