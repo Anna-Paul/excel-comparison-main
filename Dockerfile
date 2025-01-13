@@ -20,7 +20,7 @@ COPY ["ExelComparison/Aspose.Cells.NET.lic", "/app/build/Aspose.Cells.NET.lic"]
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
 RUN dotnet publish "./ExelComparison.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
-COPY ["ExelComparison/Aspose.Cells.NET.lic", "/app/publish/Aspose.Cells.NET.lic"]
+RUN ls -la ./
 
 FROM base AS final
 WORKDIR /app
