@@ -13,8 +13,9 @@ COPY ["ExelComparison/ExelComparison.csproj", "ExelComparison/"]
 RUN dotnet restore "./ExelComparison/ExelComparison.csproj"
 COPY . .
 WORKDIR "/src/ExelComparison"
+RUN ls /src
 RUN dotnet build "./ExelComparison.csproj" -c $BUILD_CONFIGURATION -o /app/build
-RUN ls /app
+RUN ls -la /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
