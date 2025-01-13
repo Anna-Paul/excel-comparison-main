@@ -1,0 +1,6 @@
+@ExelComparison_HostAddress = http://localhost:5095
+
+GET {{ExelComparison_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
