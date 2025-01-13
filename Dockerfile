@@ -15,14 +15,14 @@ RUN dotnet restore "./ExelComparison/ExelComparison.csproj"
 COPY . .
 WORKDIR "/src/ExelComparison"
 RUN dotnet build "./ExelComparison.csproj" -c $BUILD_CONFIGURATION -o /app/build
+COPY ["ExelComparison/Aspose.Cells.NET.lic", "/app/build/Aspose.Cells.NET.lic"]
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
 RUN dotnet publish "./ExelComparison.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
-RUN ls -la /app/publish
+COPY ["ExelComparison/Aspose.Cells.NET.lic", "/app/publish/Aspose.Cells.NET.lic"]
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-COPY ["ExelComparison/Aspose.Cells.NET.lic", "/app/Aspose.Cells.NET.lic"]
 ENTRYPOINT ["dotnet", "ExelComparison.dll"]
